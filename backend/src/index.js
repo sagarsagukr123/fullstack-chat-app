@@ -28,6 +28,7 @@ dotenv.config();
 
 // Get the PORT number from environment variables
 const PORT = process.env.PORT;
+// Get the absolute path of the current directory
 const __dirname = path.resolve();
 // Body -parser Middleware: Parse incoming JSON request bodies and make them available in req.body
 app.use(express.json({ limit: "10mb" }));
@@ -50,13 +51,15 @@ app.use("/api/messages", messageRoutes);
 // in production, serve the static files (dist)from the React frontend app we have index.html
 // This is useful for serving the frontend application when the backend and frontend are deployed together
 // static middleware  from express serves files from a directory
+// Serve static files from the React frontend app in production
 if (process.env.NODE_ENV === "production") {
-    // Serve static files from the React frontend app
     app.use(express.static(path.join(__dirname, "../frontend/dist")));
-    app.get("*", (req, res) => {
-        res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+  
+    // Fallback: serve index.html for any unmatched route
+    app.get("/*", (req, res) => {
+      res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
     });
-}
+  }
 
 // Start the server, listen on the specified PORT
 server.listen(PORT, () => {
@@ -93,4 +96,4 @@ server.listen(PORT, () => {
 // req.body	Contains the parsed body of the HTTP request (like form or JSON data)
 // express.json()	Parses incoming JSON requests ,and Converts them into JavaScript objects Attaches the result to req.body
 //app.use(express.json());
-//👉 This tells Express: "Hey, whenever you get a request with JSON in the body — parse it into a JS object and make it available in req.body."
+// This tells Express: "Hey, whenever you get a request with JSON in the body — parse it into a JS object and make it available in req.body."
