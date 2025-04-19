@@ -52,7 +52,7 @@ app.use("/api/messages", messageRoutes);
 // static middleware  from express serves files from a directory
 if (process.env.NODE_ENV === "production") {
     // Serve static files from the React frontend app
-    app.use(express.static(path.join(_dirname, "../frontend/dist")));
+    app.use(express.static(path.join(__dirname, "../frontend/dist")));
     app.get("*", (req, res) => {
         res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
     });
