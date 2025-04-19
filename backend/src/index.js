@@ -70,30 +70,3 @@ server.listen(PORT, () => {
     connectDB();
 });
 
-
-// In Express, when a client (like your frontend or Postman) sends a POST, PUT, or PATCH request — it can send data in the request body.
-// json
-// http
-
-// POST /api/auth/signup
-// Content-Type: application/json
-
-// {
-//   "fullName": "Sagar KR",
-//   "email": "sagar@example.com",
-//   "password": "123456"
-// }
-// When the server receives this request, the data is stored inside req.body.
-// In your route or controller:
-
-// javascript
-// const { fullName, email, password } = req.body;
-// This extracts the values sent in the request body. -------Requrired in signup,login fuction
-
-// But — this only works if the server knows how to read/parse it.
-// That’s where express.json() comes in.
-// Term	Meaning
-// req.body	Contains the parsed body of the HTTP request (like form or JSON data)
-// express.json()	Parses incoming JSON requests ,and Converts them into JavaScript objects Attaches the result to req.body
-//app.use(express.json());
-// This tells Express: "Hey, whenever you get a request with JSON in the body — parse it into a JS object and make it available in req.body."
