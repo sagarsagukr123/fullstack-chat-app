@@ -28,7 +28,7 @@ dotenv.config();
 
 // Get the PORT number from environment variables
 const PORT = process.env.PORT;
-const _dirname = path.resolve();
+const __dirname = path.resolve();
 // Body -parser Middleware: Parse incoming JSON request bodies and make them available in req.body
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
@@ -54,7 +54,7 @@ if (process.env.NODE_ENV === "production") {
     // Serve static files from the React frontend app
     app.use(express.static(path.join(_dirname, "../frontend/dist")));
     app.get("*", (req, res) => {
-        res.sendFile(path.join(_dirname, "../frontend", "dist", "index.html"));
+        res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
     });
 }
 
